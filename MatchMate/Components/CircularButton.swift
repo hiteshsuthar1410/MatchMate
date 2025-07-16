@@ -11,8 +11,8 @@ struct CircularButton: View {
     let imageName: String
     let action: () -> Void
     var size: CGFloat = 50
-    var backgroundColor: Color = .blue
-    var foregroundColor: Color = .white
+    var backgroundColor: Color = .white
+    var foregroundColor: Color = .blue
 
     var body: some View {
         Button(action: action) {

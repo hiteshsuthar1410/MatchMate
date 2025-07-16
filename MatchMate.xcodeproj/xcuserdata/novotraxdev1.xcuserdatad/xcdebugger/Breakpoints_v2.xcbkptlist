@@ -14,8 +14,8 @@
             filePath = "MatchMate/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
             landmarkName = "fetchUsers()"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,40 +30,10 @@
             filePath = "MatchMate/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "fetchUsers()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "26D557AF-D551-4995-9E9C-02AF33156D4E - 2436f6c5ada2c228"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for MatchMate.UserViewModel.fetchUsers() async -&gt; ()"
-                  moduleName = "MatchMate.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/novotraxdev1/Desktop/MatchMate/MatchMate/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31">
-               </Location>
-               <Location
-                  uuid = "26D557AF-D551-4995-9E9C-02AF33156D4E - 444ac2d99ee5142f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for MatchMate.UserViewModel.fetchUsers() async -&gt; ()"
-                  moduleName = "MatchMate.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/novotraxdev1/Desktop/MatchMate/MatchMate/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -76,40 +46,10 @@
             filePath = "MatchMate/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "fetchUsers()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D333E1B1-EE9E-48DA-A234-E990B095FD9C - 2436f6c5ada2c2ee"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for MatchMate.UserViewModel.fetchUsers() async -&gt; ()"
-                  moduleName = "MatchMate.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/novotraxdev1/Desktop/MatchMate/MatchMate/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33">
-               </Location>
-               <Location
-                  uuid = "D333E1B1-EE9E-48DA-A234-E990B095FD9C - 444ac2d99ee514e9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for MatchMate.UserViewModel.fetchUsers() async -&gt; ()"
-                  moduleName = "MatchMate.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/novotraxdev1/Desktop/MatchMate/MatchMate/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

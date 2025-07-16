@@ -13,8 +13,11 @@ struct MatchMateApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            MainTabView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .onAppear {
+                    setupTabBarAppearance()
+                }
         }
     }
 }

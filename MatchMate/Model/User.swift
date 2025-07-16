@@ -13,7 +13,11 @@ struct User: Identifiable, Codable {
     let phone: String
     let picture: Picture
     let location: Location
-    var isOnline: Bool = true // for UI, not in API response
+    
+    // for UI, not in API response
+    var isOnline: Bool = true
+    let isActionTaken = false
+    let isAccepted = false
     
     enum CodingKeys: String, CodingKey {
         case name, email, phone, picture, location

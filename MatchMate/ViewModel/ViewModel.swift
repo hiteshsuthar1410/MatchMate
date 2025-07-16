@@ -11,11 +11,15 @@ class UserViewModel: ObservableObject {
     @Published var users: [User] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var toastConfig = (show: false, message: "Toast Message")
+    
+    let baseURL = "https://randomuser.me/api/"
+    let pageLimit = 20
 
     func fetchUsers() async {
         isLoading = true
         errorMessage = nil
-        let urlString = "https://randomuser.me/api/?results=10"
+        let urlString = "\(baseURL)?results=\(pageLimit)"
         
         guard let url = URL(string: urlString) else {
             errorMessage = "Invalid URL"
