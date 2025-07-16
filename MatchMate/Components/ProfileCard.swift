@@ -10,66 +10,85 @@ import SDWebImageSwiftUI
 
 struct ProfileCard: View {
     
-    let user = User.preview
+    var user = User.preview
     var body: some View {
         ZStack {
             GeometryReader { geometry in
-                VStack {
-                    WebImage(url: URL(string: user.picture.large))
-                        .resizable()
-                        .scaledToFill()
-                        .frame(
-                            maxWidth: geometry.size.width,
-                            maxHeight: geometry.size.height
-                        )
-                        .aspectRatio(3/4, contentMode: .fit)
-                        .clipped()
-                        .cornerRadius(20)
-                }
-                .background(Color.green)
-            }
-            
-            VStack(alignment: .leading) {
-                Group {
-                    if user.isOnline {
-                        HStack {
-                            Image(systemName: "circle.fill")
-                                .foregroundStyle(.green)
-                            Text("Active")
-                                .font(.caption)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                            
+                // User Image
+                WebImage(url: URL(string: user.picture.large))
+                    .resizable()
+                    .scaledToFill()
+                    .frame(
+                        maxWidth: geometry.size.width,
+                        maxHeight: geometry.size.height
+                    )
+                    .aspectRatio(3/4, contentMode: .fit)
+                    .clipped()
+                    .cornerRadius(36)
+                
+                    .overlay(alignment: .bottom) {
+                        // User Info
+                        VStack(alignment: .leading, spacing: 4) {
+                            Group {
+                                // Active Status
+                                if user.isOnline {
+                                    HStack {
+                                        Image(systemName: "circle.fill")
+                                            .foregroundStyle(.green)
+                                        Text("Active")
+                                            .font(.caption)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.white)
+                                        
+                                    }
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 4)
+                                    .background(Color.white.opacity(0.2))
+                                    .clipShape(Capsule())
+                                    .padding(.top, 6)
+                                }
+                                // User Info
+                                HStack {
+                                    VStack(spacing: 4) {
+                                        HStack {
+                                            Text(user.name.fullName)
+                                                .lineLimit(1)
+                                                .font(.title3)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(.white)
+                                            
+                                            Image(systemName: "checkmark.seal.fill")
+                                                .foregroundStyle(.white)
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        
+                                        Text(user.location.fullAddress)
+                                            .lineLimit(2)
+                                            .font(.callout)
+                                            .foregroundColor(.white)
+                                            .padding(.bottom, 6)
+                                        
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                    }
+                                    Spacer()
+                                    
+                                    // Action Buttons
+                                    CircularButton(imageName: "x.circle.fill", action: {}, backgroundColor: Color.red, foregroundColor: Color.white)
+                                    CircularButton(imageName: "checkmark.circle.fill", action: {}, backgroundColor: Color.green, foregroundColor: Color.white)
+                                }
+                            }
+                            .padding(.horizontal)
+                            .padding(.vertical, 2)
                         }
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 4)
-                        .background(Color.white.opacity(0.2))
-                        .clipShape(Capsule())
-                        .padding(.top, 6)
+                        .background(Color.black.opacity(0.3))
+                        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 10.0))
+                        .cornerRadius(26)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 8)
+
                     }
-                    HStack {
-                        Text(user.name.fullName)
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                        
-                        Spacer()
-                    }
-                    
-                    Text(user.location.fullAddress)
-                        .font(.callout)
-                        .foregroundColor(.white)
-                        .padding(.bottom, 6)
-                }
-                .padding(.horizontal)
-                .padding(.vertical, 2)
-                
                 
             }
-            .background(Color.black.opacity(0.3))
-            .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 10.0))
-            .foregroundStyle(.secondary)
-            .padding()
         }
     }
 }

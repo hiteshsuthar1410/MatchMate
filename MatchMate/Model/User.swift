@@ -14,6 +14,10 @@ struct User: Identifiable, Codable {
     let picture: Picture
     let location: Location
     var isOnline: Bool = true // for UI, not in API response
+    
+    enum CodingKeys: String, CodingKey {
+        case name, email, phone, picture, location
+    }
 
     struct Name: Codable {
         let title: String
