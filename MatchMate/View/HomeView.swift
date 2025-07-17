@@ -10,10 +10,11 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var vm: UserViewModel
     var showFilteredList = false
+    
     var body: some View {
         NavigationStack {
             VStack {
-                // Top greeting and avatar
+                //MARK:  User Info
                 HStack {
                     Image("userImage")
                         .resizable()
@@ -30,9 +31,7 @@ struct HomeView: View {
                             .font(.subheadline)
                             .foregroundColor(.gray)
                     }
-                    
                     Spacer()
-                    
                 }
                 .padding(.horizontal)
                 
@@ -58,12 +57,15 @@ struct HomeView: View {
                             .listStyle(.plain)
                             .edgesIgnoringSafeArea(.all)
                         }
-                        
                     }
                     .scrollContentBackground(.hidden)
+                    .refreshable {
+                        if !showFilteredList {
+                            await vm.loadUsers(isRefresh: true)
+                        }
+                    }
                 }
             }
-            
             .background(Color.black, ignoresSafeAreaEdges: .all)
             .toast(isPresented: $vm.toastConfig.show, message: $vm.toastConfig.message)
             .task {

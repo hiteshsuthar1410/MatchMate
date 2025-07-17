@@ -22,16 +22,16 @@ class Persistence: ObservableObject {
     
     func saveUsersToCoreData(_ users: [User], context: NSManagedObjectContext) {
         let fetchRequest: NSFetchRequest<CDUser> = CDUser.fetchRequest()
-
+        
         for user in users {
             print("Saving user \(user.name.fullName)")
             fetchRequest.predicate = NSPredicate(format: "uuid == %@", user.login.uuid)
-
+            
             do {
                 let results = try context.fetch(fetchRequest)
-
+                
                 if let existing = results.first {
-                    // Update all except isActionTaken and isAccepted
+                    // Update all except isActionTaken, isAccepted and timestamp
                     existing.title = user.name.title
                     existing.first = user.name.first
                     existing.last = user.name.last
@@ -78,12 +78,11 @@ class Persistence: ObservableObject {
                     newUser.timestamp = user.timestamp
                     newUser.lastUpdate = user.lastUpdate
                 }
-
             } catch {
                 print("Failed to fetch CDUser with uuid \(user.login.uuid): \(error)")
             }
         }
-
+        
         do {
             try context.save()
             print("Users saved/updated successfully.")
@@ -95,7 +94,7 @@ class Persistence: ObservableObject {
     func fetchUsersFromCoreData(context: NSManagedObjectContext) -> [User] {
         let request: NSFetchRequest<CDUser> = CDUser.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \CDUser.timestamp, ascending: false)]
-
+        
         do {
             let cdUsers = try context.fetch(request)
             print("Retriving \(cdUsers.count)")
@@ -135,12 +134,12 @@ class Persistence: ObservableObject {
             return []
         }
     }
-
+    
     // Update action status for a given user by uuid
     func updateUserAction(uuid: String, isAccepted: Bool, context: NSManagedObjectContext) {
         let fetchRequest: NSFetchRequest<CDUser> = CDUser.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "uuid == %@", uuid)
-
+        
         do {
             if let user = try context.fetch(fetchRequest).first {
                 user.isActionTaken = true

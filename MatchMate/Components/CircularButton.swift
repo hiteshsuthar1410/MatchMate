@@ -31,5 +31,5 @@ struct CircularButton: View {
 }
 
 #Preview {
-    CircularButton(imageName: "circle.fill") {}
+    CircularButton(imageName: "checkmark.circle.fill") {}
 }

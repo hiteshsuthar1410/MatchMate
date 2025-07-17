@@ -16,6 +16,7 @@ class UserViewModel: ObservableObject {
     @Published private var isInitialLoad = true
     let persistence = Persistence()
     
+    // For User Interacted List
     var filteredUsers: [User] {
         users
             .filter { $0.isActionTaken }
@@ -24,10 +25,10 @@ class UserViewModel: ObservableObject {
             }
     }
     
-    func loadUsers() async {
-        guard isInitialLoad else {
-            return
-        }
+    // Fetch from server -> save in db -> retrieve
+    func loadUsers(isRefresh: Bool = false) async {
+        let shouldLoad = isRefresh || isInitialLoad
+        guard shouldLoad else { return }
         
         isLoading = true
         errorMessage = nil

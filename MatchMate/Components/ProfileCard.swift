@@ -9,7 +9,6 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ProfileCard: View {
-    
     var user = User.preview
     
     var acceptButtonAction: () -> ()
@@ -18,7 +17,7 @@ struct ProfileCard: View {
     var body: some View {
         ZStack {
             GeometryReader { geometry in
-                // User Image
+                //MARK: User Image
                 WebImage(url: URL(string: user.picture.large))
                     .resizable()
                     .scaledToFill()
@@ -31,10 +30,12 @@ struct ProfileCard: View {
                     .cornerRadius(36)
                 
                     .overlay(alignment: .bottom) {
-                        // User Info
+                        
+                        //MARK: User Info
                         VStack(alignment: .leading, spacing: 4) {
                             Group {
-                                // Active Status
+                                
+                                //MARK: Active Status
                                 if user.isOnline {
                                     HStack {
                                         Image(systemName: "circle.fill")
@@ -51,7 +52,8 @@ struct ProfileCard: View {
                                     .clipShape(Capsule())
                                     .padding(.top, 6)
                                 }
-                                // User Info
+                                
+                                //MARK: Name, Address
                                 HStack {
                                     VStack(spacing: 4) {
                                         HStack {
@@ -76,7 +78,6 @@ struct ProfileCard: View {
                                     }
                                     Spacer()
                                     
-                                    // Action Buttons
                                     if user.isActionTaken {
                                         if user.isAccepted {
                                             ButtonWithTitle(title: "Accepted", imageName: "checkmark.circle.fill", action: {})
@@ -85,12 +86,14 @@ struct ProfileCard: View {
                                         }
                                         
                                     } else {
+                                        //MARK: Action Buttons
                                         CircularButton(imageName: "x.circle.fill", action: {
                                             withAnimation {
                                                 declineButtonAction()
                                             }
                                         }, backgroundColor: Color.red, foregroundColor: Color.white)
                                         .buttonStyle(.plain)
+                                        
                                         CircularButton(imageName: "checkmark.circle.fill", action: {
                                             withAnimation {
                                                 acceptButtonAction()
@@ -103,14 +106,12 @@ struct ProfileCard: View {
                             .padding(.horizontal)
                             .padding(.vertical, 2)
                         }
-                        .background(Color.black.opacity(0.35))
+                        .background(Color.black.opacity(0.2))
                         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 0.0))
                         .cornerRadius(26)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 8)
-
                     }
-                
             }
         }
     }

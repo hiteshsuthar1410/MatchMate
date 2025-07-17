@@ -21,7 +21,7 @@ struct MainTabView: View {
             HomeView(showFilteredList: true)
                 .environmentObject(vm)
                 .tabItem {
-                    Label("Activity", systemImage: "person.crop.circle.badge.checkmark")
+                    Label("History", systemImage: "person.badge.clock")
                 }
         }
         .tint(.pink)
