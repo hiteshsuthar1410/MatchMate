@@ -86,12 +86,17 @@ struct ProfileCard: View {
                                         
                                     } else {
                                         CircularButton(imageName: "x.circle.fill", action: {
-                                            declineButtonAction()
+                                            withAnimation {
+                                                declineButtonAction()
+                                            }
                                         }, backgroundColor: Color.red, foregroundColor: Color.white)
                                         .buttonStyle(.plain)
                                         CircularButton(imageName: "checkmark.circle.fill", action: {
-                                            acceptButtonAction()
+                                            withAnimation {
+                                                acceptButtonAction()
+                                            }
                                         }, backgroundColor: Color.green, foregroundColor: Color.white)
+                                        .buttonStyle(.borderless)
                                     }
                                 }
                             }

@@ -9,14 +9,17 @@ import SwiftUI
 import UIKit
 
 struct MainTabView: View {
+    @StateObject var vm = UserViewModel()
     var body: some View {
         TabView {
             HomeView()
+                .environmentObject(vm)
                 .tabItem {
                     Label("Explore", systemImage: "sparkles")
                 }
             
-            HomeView()
+            HomeView(showFilteredList: true)
+                .environmentObject(vm)
                 .tabItem {
                     Label("Activity", systemImage: "person.crop.circle.badge.checkmark")
                 }

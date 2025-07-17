@@ -9,12 +9,9 @@ import SwiftUI
 
 @main
 struct MatchMateApp: App {
-    let persistenceController = PersistenceController.shared
-
     var body: some Scene {
         WindowGroup {
             MainTabView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onAppear {
                     setupTabBarAppearance()
                 }

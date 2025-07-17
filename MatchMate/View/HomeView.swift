@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var vm = UserViewModel()
+    @EnvironmentObject var vm: UserViewModel
+    var showFilteredList = false
     var body: some View {
         NavigationStack {
             VStack {
@@ -35,37 +36,46 @@ struct HomeView: View {
                 }
                 .padding(.horizontal)
                 
-                List {
-                    ForEach(vm.users, id: \.id) { user in
-                        ProfileCard(user: user, acceptButtonAction: {
-                            vm.toastConfig = (show: true, message: "Accepted")
-                        }, declineButtonAction: {
-                            vm.toastConfig = (show: true, message: "Declined")
-                        })
-                            .frame(maxWidth: .infinity)
-                            .aspectRatio(3/4, contentMode: .fit)
-                            .listRowInsets(EdgeInsets())
-                            .listRowSeparator(.hidden)
-                            .padding(.vertical, 12)
+                if vm.isLoading {
+                    ProgressView() {
+                        Text("Finding people you’ll love to meet 🥰")
                     }
-                    .listStyle(.plain)
-                    .edgesIgnoringSafeArea(.all)
-                    .background(Color.black)
-                    
-                    
-                }
-                .scrollContentBackground(.hidden)
-                .task {
-                    await vm.fetchUsers()
+                    .frame(maxHeight: .infinity)
+                } else {
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(showFilteredList ? vm.filteredUsers : vm.users, id: \.login.uuid) { user in
+                                ProfileCard(user: user, acceptButtonAction: {
+                                    vm.handleUserAction(uuid: user.id, isAccepted: true)
+                                }, declineButtonAction: {
+                                    vm.handleUserAction(uuid: user.id, isAccepted: false)
+                                })
+                                .frame(maxWidth: .infinity)
+                                .aspectRatio(3/4, contentMode: .fit)
+                                .padding(.vertical, 12)
+                                .padding(.horizontal, 12)
+                            }
+                            .listStyle(.plain)
+                            .edgesIgnoringSafeArea(.all)
+                        }
+                        
+                    }
+                    .scrollContentBackground(.hidden)
                 }
             }
-            .tint(.white)
+            
             .background(Color.black, ignoresSafeAreaEdges: .all)
             .toast(isPresented: $vm.toastConfig.show, message: $vm.toastConfig.message)
+            .task {
+                if !showFilteredList {
+                    await vm.loadUsers()
+                }
+            }
         }
     }
 }
 
 #Preview {
     HomeView()
+        .environmentObject(UserViewModel())
 }

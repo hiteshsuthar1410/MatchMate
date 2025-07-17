@@ -7,20 +7,25 @@
 
 import Foundation
 struct User: Identifiable, Codable {
-    var id = UUID()  // Local ID for SwiftUI
+    var id : String {
+        login.uuid
+    }
     let name: Name
     let email: String
     let phone: String
     let picture: Picture
     let location: Location
+    let login: Login
     
     // for UI, not in API response
     var isOnline: Bool = true
-    let isActionTaken = false
-    let isAccepted = false
+    var isActionTaken = false
+    var isAccepted = false
+    var timestamp = Date()
+    var lastUpdate = Date()
     
     enum CodingKeys: String, CodingKey {
-        case name, email, phone, picture, location
+        case name, email, phone, picture, location, login
     }
 
     struct Name: Codable {
@@ -40,20 +45,23 @@ struct User: Identifiable, Codable {
     }
     
     struct Location: Codable {
-            let street: Street
-            let city: String
-            let state: String
-            let country: String
-
-            struct Street: Codable {
-                let number: Int
-                let name: String
-            }
-
-            var fullAddress: String {
-                "\(street.number) \(street.name), \(city), \(state), \(country)"
-            }
+        let street: Street
+        let city: String
+        let state: String
+        let country: String
+        
+        struct Street: Codable {
+            let number: Int
+            let name: String
         }
+        
+        var fullAddress: String {
+            "\(street.number) \(street.name), \(city), \(state), \(country)"
+        }
+    }
+    struct Login: Codable {
+        var uuid: String
+    }
 }
 
 extension User {
@@ -78,6 +86,7 @@ extension User {
                     city: "San Francisco",
                     state: "California",
                     country: "USA"
-                )
+                ),
+        login: Login(uuid: UUID().uuidString)
     )
 }
